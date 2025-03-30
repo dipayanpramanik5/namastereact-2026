@@ -1,0 +1,24 @@
+- NPM is packagae manager.
+- packagae.json is npm configuration.
+- package.lock.json keeps track of exact version.
+- Bundler is user to bundle css/js/html to make the application as production build.
+- Webpack is default bundler in create-react-app.
+- We will use parcel bundler here. (https://parceljs.org/docs/)
+  -- dev build
+  -- local server
+  -- HMR(Hot Module Replacement)
+  -- File watching alogorithm (Written in C++)
+  -- image optimization
+  -- minification
+  -- bundling
+  -- consistant hashing
+  -- code splitting
+  -- Differential Bundling (App supported in the older version of browser)
+  -- Diagnostic, Error handling
+  -- Host application in https also.
+  -- Tree shaking (Remove unused code)
+- 'npx parcel build' is used to generate production build and entrypoint is main in package.json file.
+- Carrot in package version to update minor/patch version.
+- Tilde (~) in package version to update patch version.
+- transitive dependency thats why we get so many packages.
+- npx is used to execute a package.
