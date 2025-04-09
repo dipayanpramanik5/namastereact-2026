@@ -18,7 +18,17 @@
   -- Host application in https also.
   -- Tree shaking (Remove unused code)
 - 'npx parcel build' is used to generate production build and entrypoint is main in package.json file.
+- browserslist
 - Carrot in package version to update minor/patch version.
 - Tilde (~) in package version to update patch version.
 - transitive dependency thats why we get so many packages.
 - npx is used to execute a package.
+
+
+- To know how to build the project, go to script of package.json of the project.
+- JSX is html like syntax
+- JSX is converted to react create element using babel.
+- Browser JS engine only understand js code.
+- JSX code transpiled by the parcel using babel before it reches to js engine.
+- attributes in jsx follow camecase.
+- Component composition is about to composit of 2 component into a single component.
