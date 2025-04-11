@@ -32,3 +32,21 @@
 - JSX code transpiled by the parcel using babel before it reches to js engine.
 - attributes in jsx follow camecase.
 - Component composition is about to composit of 2 component into a single component.
+
+- React Reconcilation (Diff Algo) found the difference of previous and current virtual dom.
+- Updates then re render the dom when any data changes (E.g, useState)
+
+- Monolith architechture is tightly coupled and hard to maintain. Like for single change in one part, we have to build the whole application.
+- In microservice we have different services.
+
+- React fast because its dam manipulation is very efficient and its render cycle is very fast.
+- Use Effect is called after componet is rendered.
+
+- fetch() will used to fetch data from API provided by JS Egine.
+- fetch() Will return promise.
+
+- Check cors video.
+- Shimmer UI creates dummy html structure.
+
+- Rendering based on condition is known as conditional rendering.
+- On reconcilation component will rerender again.

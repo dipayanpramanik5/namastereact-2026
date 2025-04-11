@@ -1,74 +1,58 @@
 import RestaurantCard from "./RestaurantCard";
 import resObj from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 
 const Body = () => {
-    const [listOfRestraunts, setlistOfRestraunts] = useState(resObj);
-    // let listOfRestraunts = [
-    //     {
-    //       "info": {
-    //         "id": "10369",
-    //         "name": "Pizza Hut",
-    //         "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/7/17/2b5e29f4-8edb-400e-a65d-d7617a9ef913_10369.jpg",
-    //         "locality": "Tollygunge (241)",
-    //         "areaName": "Netaji Nagar",
-    //         "costForTwo": "₹350 for two",
-    //         "cuisines": [
-    //             "Pizzas"
-    //         ],
-    //         "avgRating": 4.3,
-    //         "parentId": "721",
-    //         "avgRatingString": "4.3",
-    //         "totalRatingsString": "31K+",
-    //         "sla": {
-    //             "deliveryTime": 29,
-    //             "lastMileTravel": 2.5,
-    //             "serviceability": "SERVICEABLE",
-    //             "slaString": "25-30 mins",
-    //             "lastMileTravelString": "2.5 km",
-    //             "iconType": "ICON_TYPE_EMPTY"
-    //         },
-    //       },
-    //     },
-    //     {
-    //         "info": {
-    //       "id": "103900",
-    //       "name": "KFC",
-    //       "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2024/12/9/54a0790c-ca73-4082-91ca-cece2013e469_103900.JPG",
-    //       "locality": "Southcity Mall",
-    //       "areaName": "Jadavpur",
-    //       "costForTwo": "₹450 for two",
-    //       "cuisines": [
-    //           "American",
-    //           "Snacks",
-    //           "Biryani"
-    //       ],
-    //       "avgRating": 4.5,
-    //       "parentId": "547",
-    //       "avgRatingString": "4.5",
-    //       "totalRatingsString": "12K+",
-    //       "sla": {
-    //           "deliveryTime": 37,
-    //           "lastMileTravel": 3,
-    //           "serviceability": "SERVICEABLE",
-    //           "slaString": "35-40 mins",
-    //           "lastMileTravelString": "3.0 km",
-    //           "iconType": "ICON_TYPE_EMPTY"
-    //       },
-    //     }
-    //     }
-    // ];
-    return (
+    const [listOfRestraunts, setlistOfRestraunts] = useState([]);
+    const [searchedRestraunts, setSearchedRestraunts] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
+
+    useEffect(() =>{
+        fetchData();
+    }, []);
+    
+    const fetchData = async () => {
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4876464&lng=88.371583&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const json = await data.json();
+      setlistOfRestraunts(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setSearchedRestraunts(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    }
+
+    // Conditional Rendering.
+    // if (listOfRestraunts.length == 0) {
+    //     return <Shimmer />;
+    // }
+
+    return listOfRestraunts.length == 0 ? (
+        <Shimmer/> 
+      ) : (
       <div className="body">
         <div className="filter">
+            <div className="search">
+                <input
+                  type="text"
+                  className="search-box"
+                  value={searchKeyword}
+                  onChange={(e) => {
+                    setSearchKeyword(e.target.value);
+                  }}
+                />
+                <button onClick={() => {
+                    filteredRestraunt = listOfRestraunts.filter(
+                        (res) => res.info.name.toLowerCase().includes(searchKeyword.toLowerCase())
+                    )
+                    setSearchedRestraunts(filteredRestraunt);
+                }}> Search </button>
+            </div>
             <button 
               className="filter-btn"
               onClick={()=>{
                 filteredRestraunt = listOfRestraunts.filter(
                     (res) => res.info.avgRating > 4.6
                 );
-                setlistOfRestraunts(filteredRestraunt);
+                setSearchedRestraunts(filteredRestraunt);
             }}
             >
               Top Rated Restro
@@ -76,7 +60,7 @@ const Body = () => {
         </div>
         <div className="res-container">
           {
-            listOfRestraunts.map((restraunt) => (
+            searchedRestraunts.map((restraunt) => (
               <RestaurantCard key={restraunt?.info?.id} resData={restraunt}/>
             ))
           }
