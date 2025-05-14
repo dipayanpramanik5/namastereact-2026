@@ -50,3 +50,41 @@
 
 - Rendering based on condition is known as conditional rendering.
 - On reconcilation component will rerender again.
+
+
+- Hooks are utlity function.
+- Hooks used to make the components more moduler.
+- Use is not mandatory for custom hooks names, but its recommended.
+
+
+- Using parcel act as bundler it combines all files into a single file, which may larger in size can be the reason of slow application.
+
+-- So we have to use features of parcel like Chunking, Code Splitting, Dynamic bundling to break down into smaller logical chunks instead of single files. Also known as lazy loading, on demand loading, dynamic importing
+
+-- Higher order component is a function, which takes a component and returns a component.
+
+-- Props drilling -> Passing data for nested child components we have to pass data from parent component, wheres as some child component doesn't require those data. To avoid these scenarios we have used context.
+
+--- Context -> If the data needs to be accessed in multiple places, we can use context.In functional component we can use context using hooks (useContext), where as in class components we have to use context using consumer. e.g <usercontext.Consumer>{ data} </usercontext.Consumer>
+
+--- context provider is use to pass dynamic value in context for e.g, <UserContext.provider value={{loggedinUsr:"Dipayan"}}></UserContext.provider>
+
+--- Redux is extrnal library, not part of react itself. Where as Context is part of react. Redux is state management library. Zustand is also same type of library. 
+
+--- Redux architechture: 
+  -- Redux store is a js object and kept data in global central place. Any component can access this global central place. We have slice in redux store, which is considered as a portion/partion of whole redux store. E.g, user slice, cart slice. Intially it contains empty data.
+  Writte data: Dispatch an action, then calls a function (reducer), then function modofy the slice (cart slice) of redux store.
+  For e.g, clicking on add button,  it Dispatch an action, and then calls a function, then function modofy the slice (cart slice).
+  This function known as reducer.
+
+  To read data from Slice, we use selector. Selector will get the data from slice (Portion of redux store). When we use selector it means, subscribe to a store.
+
+-- Redux tollkit
+  -- Install redux toolkit(@reduxjs/toolkit) and react-redux.
+  -- Build our store
+  -- Connect our store to app
+  -- Create slice
+  -- Dispatch an action
+  -- Read using selector.
+
+-- Dont use whole store in useSelector instead use the small required portion of the selector for performance optimization.

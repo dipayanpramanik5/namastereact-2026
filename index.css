@@ -1,4 +1,4 @@
-#heading {
+/* #heading {
     color: red;
 }
 
@@ -73,4 +73,6 @@
     height: 400px;
     background-color: lightgray;
     margin: 20px;
-}
+} */
+
+@import "tailwindcss";
